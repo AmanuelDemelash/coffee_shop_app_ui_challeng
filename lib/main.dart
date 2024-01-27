@@ -17,6 +17,12 @@ void main() {
         appBarTheme: const AppBarTheme(
           backgroundColor: Constant.appBarColor,
           elevation: 0
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Constant.primColor,
+            padding:const EdgeInsets.all(20)
+          )
         )
 
       ),
