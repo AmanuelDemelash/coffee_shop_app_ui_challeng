@@ -4,6 +4,8 @@ class HomeController extends GetxController {
   //TODO: Implement HomeController
 
   final count = 0.obs;
+  RxList<String> homeMenu=RxList<String>(["Cappuccino","Machiato","Latte","Cappuccino","Machiato","Latte"]);
+  RxInt intialMenu=0.obs;
   @override
   void onInit() {
     super.onInit();

@@ -13,6 +13,7 @@ void main() {
       theme: ThemeData(
         useMaterial3: true,
         primaryColor:Constant.primColor,
+        backgroundColor: Constant.backColor,
         appBarTheme: const AppBarTheme(
           backgroundColor: Constant.appBarColor,
           elevation: 0
