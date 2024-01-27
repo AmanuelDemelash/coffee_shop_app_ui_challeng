@@ -10,15 +10,16 @@ class DetailView extends GetView<DetailController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('DetailView'),
+        backgroundColor: Colors.transparent,
+        leading: IconButton(onPressed:() => Get.back(), icon:const Icon(Icons.arrow_back_ios)),
+        title: const Text('Detail'),
         centerTitle: true,
       ),
-      body: const Center(
-        child: Text(
-          'DetailView is working',
-          style: TextStyle(fontSize: 20),
-        ),
-      ),
+      body:Column(
+        children: [
+
+        ],
+      )
     );
   }
 }

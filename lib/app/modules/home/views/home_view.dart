@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
+import '../../../routes/app_pages.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -12,6 +13,14 @@ class HomeView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return  Scaffold(
 
+      bottomNavigationBar:NavigationBar(
+        backgroundColor: Colors.white,
+          destinations:[
+        NavigationDestination(icon:Icon(Icons.home), label:"home"),
+        NavigationDestination(icon:Icon(Icons.favorite), label:"favorite"),
+        NavigationDestination(icon:Icon(Icons.card_travel), label:"cart"),
+        NavigationDestination(icon:Icon(Icons.location_pin), label:"pin"),
+      ]),
       body:CustomScrollView(
         slivers: [
            const SliverAppBar(
@@ -92,7 +101,7 @@ class HomeView extends GetView<HomeController> {
                         height: 170,
                         margin:const EdgeInsets.all(20),
                         decoration: BoxDecoration(
-                          image: const DecorationImage(image: NetworkImage("https://images.unsplash.com/photo-1509785307050-d4066910ec1e?q=80&w=1928&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"),fit: BoxFit.cover),
+                          image: const DecorationImage(image: AssetImage("assets/promo.png"),fit: BoxFit.cover),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child:Container(
@@ -115,7 +124,7 @@ class HomeView extends GetView<HomeController> {
                                 ),
                                 child:const Text("Promo",style: TextStyle(color: Colors.white),),
                               ),
-                             const Center(child: Text("Buy one Get One Free",style: TextStyle(color: Colors.white,fontSize: 25),)),
+                             const Center(child: Text("Buy one Get One Free",style: TextStyle(color: Colors.white,fontSize:30),)),
                             ],
                           ),
                         ),
@@ -144,19 +153,31 @@ class HomeView extends GetView<HomeController> {
                               color:controller.intialMenu.value==index? Constant.primColor:Colors.white,
                               borderRadius: BorderRadius.circular(20)
                             ),
-                              child: Text(controller.homeMenu[index],style:TextStyle(color:controller.intialMenu.value==index?Colors.white:Colors.black),
+                              child: Text(controller.homeMenu[index],style:TextStyle(color:controller.intialMenu.value==index?Colors.white:Colors.black,
+                              fontSize: controller.intialMenu.value==index? 17:13),
                               )
                           ),
                       ),)
                   ),
                 ),
-                ListView.builder(
-                  padding:const EdgeInsets.all(20),
-                  itemCount: 32,
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemBuilder:(context, index) =>
-                  Text("data"),
+                Expanded(
+                  child: GridView.builder(
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+                    padding:const EdgeInsets.all(20),
+                    itemCount: 32,
+                    shrinkWrap: true,
+                    physics:const NeverScrollableScrollPhysics(),
+                    itemBuilder:(context, index) =>
+                    GestureDetector(
+                      onTap: () => Get.toNamed(Routes.DETAIL),
+                      child: Container(
+                        height: 200,
+                        margin:const EdgeInsets.all(2),
+                        color: Colors.pink,
+
+                      ),
+                    )
+                  ),
                 )
 
 
