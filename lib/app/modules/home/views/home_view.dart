@@ -13,6 +13,7 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Constant.backColor,
         appBar: AppBar(
             title: ListTile(
               title: Text("Location"),
@@ -43,33 +44,6 @@ class HomeView extends GetView<HomeController> {
         ]),
         body: ListView(
           children: [
-            //  const SliverAppBar(
-            //   title:ListTile(
-            //     title: Text("Location"),
-            //     subtitle: Row(
-            //       children: [
-            //         Text("Addis Ababa,Ethiopia"),
-            //         Icon(Icons.keyboard_arrow_down)
-            //       ],
-            //     ),
-            //     trailing: CircleAvatar(
-            //      radius:24,
-            //       backgroundImage: NetworkImage(
-            //          "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-            //       ),
-            //     ),
-            //     subtitleTextStyle: TextStyle(fontSize: 18),
-            //     titleTextStyle: TextStyle(color: Colors.white),
-            //   ),
-            //   floating: true,
-            //   pinned: false,
-            //   elevation: 0
-            //   //expandedHeight: 300,
-            // ),
-            // SliverFillRemaining(
-            //   hasScrollBody: true,
-            //   child: Column(
-            //     children: [
             Stack(
               children: [
                 SizedBox(
@@ -195,37 +169,73 @@ class HomeView extends GetView<HomeController> {
                         ),
                       )),
             ),
-            GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-                padding: const EdgeInsets.all(20),
-                itemCount: 32,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemBuilder: (context, index) => GestureDetector(
+            GetBuilder(
+              init: controller,
+              builder:(controller) =>
+                GridView.builder(
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+                    padding: const EdgeInsets.all(20),
+                    itemCount: controller.coffees.length,
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, index) => GestureDetector(
                       onTap: () => Get.toNamed(Routes.DETAIL),
-                      child: Padding(
+                      child: Container(
+                        height: 500,
                         padding: const EdgeInsets.all(8.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Container(
-                              width: Get.width,
-                              height: 109,
-                              decoration: BoxDecoration(
-                                  color: Colors.pink,
-                                  borderRadius: BorderRadius.circular(10)
+                            Expanded(
+                              child: Stack(
+                                children:[
+                                  Container(
+                                  width: Get.width,
+                                  height: 109,
+                                  decoration: BoxDecoration(
+                                      color: Colors.pink,
+                                      borderRadius: BorderRadius.circular(10)
+                                  ),
+                                ),
+                                  Positioned(
+                                    top: 0,
+                                    left: 0,
+                                    child: Container(
+                                      padding: EdgeInsets.all(4),
+                                      decoration: BoxDecoration(
+                                        color: Colors.black45,
+                                        borderRadius:BorderRadius.only(
+                                          topLeft: Radius.circular(10),
+                                          bottomRight: Radius.circular(15)
+
+                                        )
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          Icon(Icons.star,size: 13,color: Constant.primColor,),
+                                          Text("3.4",style: TextStyle(color: Colors.white),)
+                                        ],
+                                      ),
+                                    ),
+                                  )
+    ]
                               ),
                             ),
-                            Text("Cappuccino"),
+                            Text("Cappuccino",style: TextStyle(fontWeight: FontWeight.bold),),
                             Text("with chekolete"),
                             Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text("data"),
+                                Text("\$"+controller.coffees[index]["price"],style: TextStyle(fontWeight: FontWeight.bold),),
                                 Container(
                                   width: 30,
                                   height: 30,
-                                  child: Icon(Icons.add),
+                                  decoration: BoxDecoration(
+                                      color: Constant.primColor,
+                                      borderRadius: BorderRadius.circular(5)
+                                  ),
+                                  child: Icon(Icons.add,color: Colors.white,),
                                 )
                               ],
                             )
@@ -233,6 +243,8 @@ class HomeView extends GetView<HomeController> {
                         ),
                       ),
                     )),
+              )
+
 
             //  ],
             //   ),

@@ -5,6 +5,28 @@ class HomeController extends GetxController {
 
   final count = 0.obs;
   RxList<String> homeMenu=RxList<String>(["Cappuccino","Machiato","Latte","Cappuccino","Machiato","Latte"]);
+  RxList<Map<String,dynamic>> coffees=RxList<Map<String,dynamic>>([
+    {
+      "image":"",
+      "name":"",
+      "with":"",
+      "price":"32.5"
+    },
+    {
+      "image":"",
+      "name":"",
+      "with":"",
+      "price":"32.5"
+    },
+    {
+      "image":"",
+      "name":"",
+      "with":"",
+      "price":"32.5"
+    }
+
+
+  ]);
   RxInt intialMenu=0.obs;
   @override
   void onInit() {
