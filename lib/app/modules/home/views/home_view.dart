@@ -92,10 +92,30 @@ class HomeView extends GetView<HomeController> {
                         height: 150,
                         margin:const EdgeInsets.all(20),
                         decoration: BoxDecoration(
-                          color: Colors.red,
-                          borderRadius: BorderRadius.circular(10)
+                          image: const DecorationImage(image: NetworkImage("https://images.unsplash.com/photo-1509785307050-d4066910ec1e?q=80&w=1928&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"),fit: BoxFit.cover),
+                          borderRadius: BorderRadius.circular(10),
                         ),
-                        child:const Center(child: Text("Buy one Get One Free"),),
+                        child:Container(
+                          width: Get.width,
+                          color: Colors.black26,
+                          padding:const EdgeInsets.all(20),
+                          child:Column(
+                            //mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                padding:const EdgeInsets.all(5),
+                                decoration: BoxDecoration(
+                                  color: Colors.red,
+                                  borderRadius: BorderRadius.circular(10)
+                                ),
+                                child:const Text("Promo",style: TextStyle(color: Colors.white),),
+                              ),
+                             Center(child: Text("Buy one Get One Free",style: TextStyle(color: Colors.white),)),
+                            ],
+                          ),
+                        ),
+
 
                       ),
                     )
