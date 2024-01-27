@@ -13,7 +13,7 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Constant.backColor,
+        backgroundColor: Constant.backColor,
         appBar: AppBar(
             title: ListTile(
               title: Text("Location"),
@@ -36,7 +36,7 @@ class HomeView extends GetView<HomeController> {
             //expandedHeight: 300,
             ),
         bottomNavigationBar:
-            NavigationBar(backgroundColor: Colors.white, destinations: [
+            NavigationBar(backgroundColor: Colors.white, destinations: const [
           NavigationDestination(icon: Icon(Icons.home), label: "home"),
           NavigationDestination(icon: Icon(Icons.favorite), label: "favorite"),
           NavigationDestination(icon: Icon(Icons.card_travel), label: "cart"),
@@ -171,80 +171,116 @@ class HomeView extends GetView<HomeController> {
             ),
             GetBuilder(
               init: controller,
-              builder:(controller) =>
-                GridView.builder(
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-                    padding: const EdgeInsets.all(20),
-                    itemCount: controller.coffees.length,
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) => GestureDetector(
-                      onTap: () => Get.toNamed(Routes.DETAIL),
-                      child: Container(
-                        height: 500,
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              child: Stack(
-                                children:[
+              builder: (controller) => GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2),
+                  padding: const EdgeInsets.all(20),
+                  itemCount: controller.coffees.length,
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index) => GestureDetector(
+                        onTap: () => Get.toNamed(Routes.DETAIL),
+                        child: Container(
+                          height: 500,
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                child: Stack(children: [
                                   Container(
-                                  width: Get.width,
-                                  height: 109,
-                                  decoration: BoxDecoration(
-                                      color: Colors.pink,
-                                      borderRadius: BorderRadius.circular(10)
+                                    width: Get.width,
+                                    height: 109,
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(10),
+                                      child: CachedNetworkImage(
+                                        imageUrl: controller.coffees[index]
+                                            ["image"],
+                                        fit: BoxFit.cover,
+                                        placeholder: (context, url) =>
+                                            const Icon(
+                                          Icons.image,
+                                          color: Constant.primColor,
+                                        ),
+                                        errorWidget: (context, url, error) =>
+                                            const Icon(Icons.error),
+                                      ),
+                                    ),
                                   ),
-                                ),
                                   Positioned(
                                     top: 0,
                                     left: 0,
                                     child: Container(
-                                      padding: EdgeInsets.all(4),
-                                      decoration: BoxDecoration(
-                                        color: Colors.black45,
-                                        borderRadius:BorderRadius.only(
-                                          topLeft: Radius.circular(10),
-                                          bottomRight: Radius.circular(15)
-
-                                        )
-                                      ),
-                                      child: Row(
+                                      padding: const EdgeInsets.all(4),
+                                      decoration: const BoxDecoration(
+                                          color: Colors.black45,
+                                          borderRadius: BorderRadius.only(
+                                              topLeft: Radius.circular(10),
+                                              bottomRight:
+                                                  Radius.circular(15))),
+                                      child: const Row(
                                         children: [
-                                          Icon(Icons.star,size: 13,color: Constant.primColor,),
-                                          Text("3.4",style: TextStyle(color: Colors.white),)
+                                          Icon(
+                                            Icons.star,
+                                            size: 13,
+                                            color: Constant.primColor,
+                                          ),
+                                          Text(
+                                            "3.4",
+                                            style:
+                                                TextStyle(color: Colors.white),
+                                          )
                                         ],
                                       ),
                                     ),
                                   )
-    ]
+                                ]),
                               ),
-                            ),
-                            Text("Cappuccino",style: TextStyle(fontWeight: FontWeight.bold),),
-                            Text("with chekolete"),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text("\$"+controller.coffees[index]["price"],style: TextStyle(fontWeight: FontWeight.bold),),
-                                Container(
-                                  width: 30,
-                                  height: 30,
-                                  decoration: BoxDecoration(
-                                      color: Constant.primColor,
-                                      borderRadius: BorderRadius.circular(5)
-                                  ),
-                                  child: Icon(Icons.add,color: Colors.white,),
-                                )
-                              ],
-                            )
-                          ],
+                              const Padding(
+                                padding: EdgeInsets.only(left: 8.0),
+                                child: Text(
+                                  "Cappuccino",
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              const Padding(
+                                padding: EdgeInsets.only(left: 8.0),
+                                child: Text("with chekolete",style: TextStyle(color: Colors.black38),),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 8.0,right: 8.0),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      "\$" + controller.coffees[index]["price"],
+                                      style:
+                                          TextStyle(fontWeight: FontWeight.bold),
+                                    ),
+                                    Container(
+                                      width: 30,
+                                      height: 30,
+                                      decoration: BoxDecoration(
+                                          color: Constant.primColor,
+                                          borderRadius: BorderRadius.circular(5)),
+                                      child: Icon(
+                                        Icons.add,
+                                        color: Colors.white,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                    )),
-              )
-
+                      )),
+            )
 
             //  ],
             //   ),
